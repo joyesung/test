@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.green.spring.pagination.Criteria;
 import kr.green.test.dao.BoardDAO;
 import kr.green.test.vo.BoardVO;
 
@@ -14,9 +15,15 @@ public class BoardServiceImp implements BoardService {
 	BoardDAO boardDao;
 	
 	@Override
-	public ArrayList<BoardVO> getBoardList() {
+	public ArrayList<BoardVO> getBoardList(Criteria cri, String valid) {
 		
-		return boardDao.selectBoardList();
+		return boardDao.selectBoardList(cri,valid);
+	}
+
+	@Override
+	public int getTotalCount(Criteria cri, String valid) {
+		
+		return boardDao.selectCountBoardList(cri, valid);
 	}
 
 }

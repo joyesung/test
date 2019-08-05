@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.spring.pagination.Criteria;
+import kr.green.spring.pagination.PageMaker;
 import kr.green.test.service.BoardService;
 import kr.green.test.service.MemberService;
+import kr.green.test.service.PageMakerService;
 import kr.green.test.vo.BoardVO;
 import kr.green.test.vo.MemberVO;
 
@@ -28,12 +31,20 @@ import kr.green.test.vo.MemberVO;
 public class BoardController {
 	@Autowired
 	BoardService boardService;
+	@Autowired
+	PageMakerService pageMakerService;
 	
 	@RequestMapping(value= "/board/list",method = RequestMethod.GET)
-	public ModelAndView boardListGet(ModelAndView mv) throws Exception{
-	  ArrayList<BoardVO> list = boardService.getBoardList();
+	public ModelAndView boardListGet(ModelAndView mv, Criteria cri) throws Exception{
+	  String valid = "i";
+	  int displayPageNum = 10;
+	  ArrayList<BoardVO> list = boardService.getBoardList(cri, "i");
+	  int totalCount = boardService.getTotalCount(cri, valid);
+	  PageMaker pm = pageMakerService.getPageMaker(displayPageNum, cri, totalCount);
+	  System.out.println(pm);
 	  mv.setViewName("/board/list");
 	  mv.addObject("list", list);
+	  mv.addObject("pageMaker", pm);
 	  return mv;
 	}
 }
