@@ -14,7 +14,7 @@
   				<input type="text" class="form-control" name="writer" value="${user.id}">
 			</div>
 			<textarea id="summernote" name="contents"></textarea>
-			<input type="file" class="form-control-file border" name="file2">
+			<input type="file" class="form-control-file border" name=" file2">
 			<button type="submit" class="btn btn-danger">등록</button>
 		</form>
 </div>
