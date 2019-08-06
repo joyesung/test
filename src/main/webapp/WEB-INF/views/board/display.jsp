@@ -24,9 +24,14 @@
 		</div>
 		<div class="form-group">
 			<label>첨부파일</label>
+			<c:if test="${board.fileName ne ''}">
 			<a href="<%=request.getContextPath()%>/board/download?fileName=${board.file}">
 			${board.fileName}
-			</a>	
+			</a>
+			</c:if>	
+			<c:if test="${board.fileName eq ''}">
+			없음
+			</c:if>	
 		</div>
 		<div>
 			<a href="<%=request.getContextPath()%>/board/list?&page=${cri.page}&type=${cri.type}&search=${cri.search}"><button type="submit" class="btn btn-danger">목록</button></a>

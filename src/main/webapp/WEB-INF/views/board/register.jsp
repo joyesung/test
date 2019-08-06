@@ -11,7 +11,7 @@
   				<input type="text" class="form-control" name="title" placeholder="제목">
 			</div>
 			<div class="form-group col-4 mb-0">
-  				<input type="text" class="form-control" name="writer" value="${user.id}">
+  				<input type="text" class="form-control" name="writer" value="${user.id}" readonly>
 			</div>
 			<textarea id="summernote" name="contents"></textarea>
 			<input type="file" class="form-control-file border" name=" file2">
