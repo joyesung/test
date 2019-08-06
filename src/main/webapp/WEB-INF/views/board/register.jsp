@@ -6,7 +6,7 @@
 </head>
 <div style="min-height: 561px">
 	<h1>게시글 등록</h1>
-		<form method="post" action="<%=request.getContextPath() %>/board/register">
+		<form method="post" enctype="multipart/form-data" action="<%=request.getContextPath() %>/board/register">
 			<div class="form-group col-4 mb-0">
   				<input type="text" class="form-control" name="title" placeholder="제목">
 			</div>
@@ -14,6 +14,7 @@
   				<input type="text" class="form-control" name="writer" value="${user.id}">
 			</div>
 			<textarea id="summernote" name="contents"></textarea>
+			<input type="file" class="form-control-file border" name="file2">
 			<button type="submit" class="btn btn-danger">등록</button>
 		</form>
 </div>
