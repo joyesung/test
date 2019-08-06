@@ -86,5 +86,12 @@ public class BoardController {
 		boardService.modifyBoard(bVo);
 		return "redirect:/board/list";
 	}
+	@RequestMapping(value= "/board/delete",method = RequestMethod.GET)
+	public ModelAndView boardDeleteyget(ModelAndView mv, Integer num, HttpServletRequest r){
+		if(boardService.isWriter(num, r))  
+		boardService.deleteBoard(num);
+		mv.setViewName("redirect:/board/list");
+		return mv;
+	}
 }
   
