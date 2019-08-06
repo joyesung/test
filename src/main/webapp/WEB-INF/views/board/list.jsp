@@ -40,7 +40,7 @@
 	      	  <c:forEach items="${list}" var="board">
 			      <tr>
 			        <td>${board.num}</td>
-			        <td><a href="<%=request.getContextPath()%>/display?num=${board.num}">
+			        <td><a href="<%=request.getContextPath()%>/board/display?num=${board.num}">
 			        ${board.title}
 		        	</a>
 			        </td>
@@ -82,5 +82,8 @@
 	            <a class="page-link" href="<%=request.getContextPath()%>/board/list?page=${pageMaker.endPage+1}&type=${pageMaker.criteria.type}&search=${pageMaker.criteria.search}"><i class="fas fa-arrow-right"></i></a>
 	        </li>
 	    </c:if>
-</ul>
+	</ul>
+		<div>
+			<a href="<%=request.getContextPath()%>/board/register"><button type="submit" class="btn btn-danger">등록</button> </a>
+		</div>
 </div>

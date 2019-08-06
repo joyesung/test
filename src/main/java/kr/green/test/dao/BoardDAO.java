@@ -11,4 +11,6 @@ public interface BoardDAO {
 	public ArrayList<BoardVO> selectBoardList(@Param("cri")Criteria cri, @Param("valid")String valid);
 
 	public int selectCountBoardList(@Param("cri")Criteria cri, @Param("valid")String valid);
+
+	public void insertBoard(@Param("board")BoardVO board);
 }

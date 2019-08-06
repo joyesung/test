@@ -47,5 +47,16 @@ public class BoardController {
 	  mv.addObject("pageMaker", pm);
 	  return mv;
 	}
+	@RequestMapping(value= "/board/register",method = RequestMethod.GET)
+	public ModelAndView boardregisterGet(ModelAndView mv) throws Exception{
+	  mv.setViewName("/board/register");
+	  return mv;
+	}
+	@RequestMapping(value= "/board/register",method = RequestMethod.POST)
+	public String boardregisterPost(BoardVO bVo) throws Exception{
+	  boardService.registerBoard(bVo);
+	  System.out.println(bVo);
+	  return "redirect:/board/list";
+	}
 }
   
