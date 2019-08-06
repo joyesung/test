@@ -35,7 +35,7 @@ public class BoardController {
 	PageMakerService pageMakerService;
 	
 	@RequestMapping(value= "/board/list",method = RequestMethod.GET)
-	public ModelAndView boardListGet(ModelAndView mv, Criteria cri) throws Exception{
+	public ModelAndView boardListGet(ModelAndView mv, Criteria cri) {
 	  String valid = "i";
 	  int displayPageNum = 3;
 	  ArrayList<BoardVO> list = boardService.getBoardList(cri, "i");
@@ -48,15 +48,23 @@ public class BoardController {
 	  return mv;
 	}
 	@RequestMapping(value= "/board/register",method = RequestMethod.GET)
-	public ModelAndView boardregisterGet(ModelAndView mv) throws Exception{
+	public ModelAndView boardregisterGet(ModelAndView mv) {
 	  mv.setViewName("/board/register");
 	  return mv;
 	}
 	@RequestMapping(value= "/board/register",method = RequestMethod.POST)
-	public String boardregisterPost(BoardVO bVo) throws Exception{
+	public String boardregisterPost(BoardVO bVo){
 	  boardService.registerBoard(bVo);
 	  System.out.println(bVo);
 	  return "redirect:/board/list";
+	}
+	@RequestMapping(value= "/board/display",method = RequestMethod.GET)
+	public ModelAndView boardDisplayget(ModelAndView mv, Integer num, Criteria cri){
+	  BoardVO board = boardService.getBoard(num);
+	  mv.setViewName("/board/display");
+	  mv.addObject("board", board);
+	  mv.addObject("cri", cri);
+	  return mv;
 	}
 }
   
