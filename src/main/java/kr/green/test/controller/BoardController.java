@@ -36,35 +36,55 @@ public class BoardController {
 	
 	@RequestMapping(value= "/board/list",method = RequestMethod.GET)
 	public ModelAndView boardListGet(ModelAndView mv, Criteria cri) {
-	  String valid = "i";
-	  int displayPageNum = 3;
-	  ArrayList<BoardVO> list = boardService.getBoardList(cri, "i");
-	  int totalCount = boardService.getTotalCount(cri, valid);
-	  PageMaker pm = pageMakerService.getPageMaker(displayPageNum, cri, totalCount);
-	  System.out.println(pm);
-	  mv.setViewName("/board/list");
-	  mv.addObject("list", list);
-	  mv.addObject("pageMaker", pm);
-	  return mv;
+		  String valid = "i";
+		  int displayPageNum = 3;
+		  ArrayList<BoardVO> list = boardService.getBoardList(cri, "i");
+		  int totalCount = boardService.getTotalCount(cri, valid);
+		  PageMaker pm = pageMakerService.getPageMaker(displayPageNum, cri, totalCount);
+		  System.out.println(pm);
+		  mv.setViewName("/board/list");
+		  mv.addObject("list", list);
+		  mv.addObject("pageMaker", pm);
+		  return mv;
 	}
 	@RequestMapping(value= "/board/register",method = RequestMethod.GET)
 	public ModelAndView boardregisterGet(ModelAndView mv) {
-	  mv.setViewName("/board/register");
-	  return mv;
+		  mv.setViewName("/board/register");
+		  return mv;
 	}
 	@RequestMapping(value= "/board/register",method = RequestMethod.POST)
 	public String boardregisterPost(BoardVO bVo){
-	  boardService.registerBoard(bVo);
-	  System.out.println(bVo);
-	  return "redirect:/board/list";
+		  boardService.registerBoard(bVo);
+		  System.out.println(bVo);
+		  return "redirect:/board/list";
 	}
 	@RequestMapping(value= "/board/display",method = RequestMethod.GET)
 	public ModelAndView boardDisplayget(ModelAndView mv, Integer num, Criteria cri){
-	  BoardVO board = boardService.getBoard(num);
-	  mv.setViewName("/board/display");
-	  mv.addObject("board", board);
-	  mv.addObject("cri", cri);
-	  return mv;
+		  BoardVO board = boardService.getBoard(num);
+		  mv.setViewName("/board/display");
+		  mv.addObject("board", board);
+		  mv.addObject("cri", cri);
+		  return mv;
+	}
+	@RequestMapping(value= "/board/modify",method = RequestMethod.GET)
+	public ModelAndView boardModifyget(ModelAndView mv, Integer num, Criteria cri, HttpServletRequest r){
+		boolean isWriter = boardService.isWriter(num,r);
+		BoardVO board = null;
+		if(isWriter) {
+			board = boardService.getBoard(num);
+			mv.setViewName("/board/modify");
+		}else {
+			mv.setViewName("redirect:/board/list");
+		}
+		
+		mv.addObject("board", board);
+		mv.addObject("cri", cri);
+		return mv;
+	}
+	@RequestMapping(value= "/board/modify",method = RequestMethod.POST)
+	public String boardModifyPost(BoardVO bVo){
+		boardService.modifyBoard(bVo);
+		return "redirect:/board/list";
 	}
 }
   
